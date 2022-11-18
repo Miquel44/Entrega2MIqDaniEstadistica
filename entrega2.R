@@ -32,3 +32,10 @@ dau<-function(k){   #Funcion de K para valores pares e impares
   }
 }
 #2b
+x<-c(1:6)
+y<-c(1/12,1/10,7/36,3/20,11/36,1/6)
+plot(x,y,type="h")
+acum<-cumsum(y)
+s<-stepfun(x,c(0,acum))
+plot(s,verticals=FALSE)
+
