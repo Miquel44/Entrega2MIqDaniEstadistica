@@ -20,4 +20,14 @@ hof/fumon*100
 mean(df$OCI==4 & df$TABAC==0)
 mean((df$OCI==2 | df$OCI==3) & df$TABAC==1)
 #1e
-
+mean(df$PES>60 & df$EDAT>=20)
+mean(df$PES<70 & df$EDAT<=50)
+#2a
+dau<-function(k){
+  if (k%%2==0){
+    return(print("P(x=k)=(k-1)/(5k)"))
+  }else{
+    return(print("P(x=k)=(1+2k)/36"))
+  }
+}
+#2b
