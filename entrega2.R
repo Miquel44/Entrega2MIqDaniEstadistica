@@ -32,10 +32,20 @@ dau<-function(k){   #Funcion de K para valores pares e impares
   }
 }
 #2b
+#2b
 x<-c(1:6)
 y<-c(1/12,1/10,7/36,3/20,11/36,1/6)
 plot(x,y,type="h")
 acum<-cumsum(y)
 s<-stepfun(x,c(0,acum))
-plot(s,verticals=FALSE)
-
+plotdau1<-plot(s,verticals=FALSE)
+xn<-c(1:6)
+yn<-c(1/6,1/6,1/6,1/6,1/6,1/6)
+acumn<-cumsum(yn)
+sn<-stepfun(xn,c(0,acumn))
+plotdau2<-plot(sn,verticals=FALSE)
+library(ggpubr)
+combined_plot <- ggarrange(plotdau1,
+                           plotdau2,
+                           nrow = 2,
+                           ncol = 1) 
