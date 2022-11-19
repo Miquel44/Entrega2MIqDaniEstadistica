@@ -32,7 +32,6 @@ dau<-function(k){   #Funcion de K para valores pares e impares
   }
 }
 #2b
-#2b
 x<-c(1:6)
 y<-c(1/12,1/10,7/36,3/20,11/36,1/6)
 plot(x,y,type="h")
@@ -46,4 +45,9 @@ sn<-stepfun(xn,c(0,acumn))
 plotdau2<-plot(sn,verticals=FALSE,col = 'red')
 par(new=T)
 plotdau1<-plot(s,verticals=FALSE)
-
+#2C
+plot(x,y,type="h")
+sum(y[c(1,3,5)])
+sum(y[c(2,4,6)])
+sum(y[c(5,6)])
+sum(y[c(1,2,3,4)])
