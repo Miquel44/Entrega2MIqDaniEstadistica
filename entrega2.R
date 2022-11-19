@@ -43,9 +43,7 @@ xn<-c(1:6)
 yn<-c(1/6,1/6,1/6,1/6,1/6,1/6)
 acumn<-cumsum(yn)
 sn<-stepfun(xn,c(0,acumn))
-plotdau2<-plot(sn,verticals=FALSE)
-library(ggpubr)
-combined_plot <- ggarrange(plotdau1,
-                           plotdau2,
-                           nrow = 2,
-                           ncol = 1) 
+plotdau2<-plot(sn,verticals=FALSE,col = 'red')
+par(new=T)
+plotdau1<-plot(s,verticals=FALSE)
+
