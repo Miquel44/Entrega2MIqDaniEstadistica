@@ -1,3 +1,4 @@
+df = enquesta
 df<- read.csv("enquesta.csv")
 #1a
 mean(df$TABAC)#probabilidad de que una persona fume
@@ -56,6 +57,29 @@ mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6)
 m<-mean(1,2,3,4,5,6)
 varianza<-(((1/12-mp)*(1-m))**2+((1/10-mp)*(2-m))**2+((7/36-mp)*(3-m))**2+((3/20-mp)*(4-m))**2+((11/36-mp)*(5-m))**2+((1/6-mp)*(6-m))**2)/6
 Esperança<-1/12*1+1/10*2+7/36*3+3/20*4+11/36*5+1/6*6
+#2e
+caso2<-(1/12)*(1/12) 
+caso3<-(1/12)*(1/10)*2
+caso4<-((1/12)*(7/36)*2) + (1/10)*(1/10)
+ProbResul<-1-sum(caso2,caso3,caso4)
+
+caso11<-(1/6)*(11/36)*2    #Que de 11, para restar a prob total => 5
+caso12<-(1/6)*(1/6)   #Resultado 12, restar a prob total >= 5
+Probtotalres<- ProbResul-caso11-caso12
+
+
+
+#3a
+x<- seq(1.00000000000000000000001,2.9999999999999999999,length=100) #agarra 100 puntos desde el 1 al 3
+plot((1/4)*((x-1)**3),type='l',xlab='1<x<3')
+y<-(1/4)*((x-1)**3)
+integrate(y,1,3)
+
+integrat
+
+
+
+
 
 #4a
 (295-298)/3
