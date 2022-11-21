@@ -13,7 +13,9 @@ d160<-mean(df$ALTURA>=160 & df$SEXE=="d") #Variable Mujeres de 160 o mas
 x<-mean((df$OCI==1 | df$OCI==2) & df$ALTURA>=160 & df$SEXE=="d") #Variable de mujeres de 160 o mas que fuman y miran televisores o Pc
 (x/d160)*100  #Probabilidad de que si es mujer de 160, su ocio sea televisores u ordenadores
 #1c
+hsport<-mean(df$OCI==4  & df$SEXE=="h")
 hof<-mean(df$OCI==4 & df$TABAC==1 & df$SEXE=="h") #Variable hombres que hacen deporte y fuman 
+hof/hsport*100
 
 fumador<-mean(df$TABAC==1) #Variable fumadores
 hof/fumador*100 #Probabilidades de que si es fumador sea hombre que hace deporte
@@ -33,16 +35,19 @@ dau<-function(k){   #Funcion de K para valores pares e impares
   }
 }
 #2b
-x<-c(1:6)
-y<-c(1/12,1/10,7/36,3/20,11/36,1/6)
-plot(x,y,type="h")
-acum<-cumsum(y)
-s<-stepfun(x,c(0,acum))
-plotdau1<-plot(s,verticals=FALSE)
+x<-c(1:6) #Representamos un vector con los valores del dado y sus posibilidades
+y<-c(1/12,1/10,7/36,3/20,11/36,1/6) 
+plot(x,y,type="h") #Grafica masa de 
+#dado1
+acum<-cumsum(y) # Suma acumulada
+s<-stepfun(x,c(0,acum)) #Mete los valores X a k uno a uno
+plotdau1<-plot(s,verticals=FALSE) #Grafica dado 1
+#dado2
 xn<-c(1:6)
 yn<-c(1/6,1/6,1/6,1/6,1/6,1/6)
 acumn<-cumsum(yn)
 sn<-stepfun(xn,c(0,acumn))
+#Grafica ambos
 plotdau2<-plot(sn,verticals=FALSE,col = 'red')
 par(new=T)
 plotdau1<-plot(s,verticals=FALSE)
@@ -53,10 +58,18 @@ sum(y[c(2,4,6)])
 sum(y[c(5,6)])
 sum(y[c(1,2,3,4)])
 #2d
-mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6)
+mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6) 
 m<-mean(1,2,3,4,5,6)
-varianza<-(((1/12-mp)*(1-m))**2+((1/10-mp)*(2-m))**2+((7/36-mp)*(3-m))**2+((3/20-mp)*(4-m))**2+((11/36-mp)*(5-m))**2+((1/6-mp)*(6-m))**2)/6
+varianza<-{(((1/12-mp)*(1-m))+((1/10-mp)*(2-m))+((7/36-mp)*(3-m))+((3/20-mp)*(4-m))+((11/36-mp)*(5-m))+((1/6-mp)*(6-m))/6)}
+            
 Esperança<-1/12*1+1/10*2+7/36*3+3/20*4+11/36*5+1/6*6
+
+y<-c(1/12,1/10,7/36,3/20,11/36,1/6) 
+list<-sample(1:6,300,replace=T,prob=(y))
+mean(list)
+var(list)
+
+
 #2e
 caso2<-(1/12)*(1/12) 
 caso3<-(1/12)*(1/10)*2
@@ -70,15 +83,35 @@ Probtotalres<- ProbResul-caso11-caso12
 
 
 #3a
-x<- seq(1.00000000000000000000001,2.9999999999999999999,length=100) #agarra 100 puntos desde el 1 al 3
+x<- seq(1.00000000000000000000001,2.9999999999999999999,length=80000) #agarra 100 puntos desde el 1 al 3
 plot((1/4)*((x-1)**3),type='l',xlab='1<x<3')
 y<-(1/4)*((x-1)**3)
-integrate(y,1,3)
 
-integrat
+int1<-integrate(function(x){(1/4)*((x-1)**3)},lower = 1, upper = )
+#1 con error absoluto<1.1e-14
+1**(-1)
+
+x1<-seq(1,3,length=10)
+plot((16/((z-1)**4)),type='l',xlab='1<x<3',col="red")
 
 
+#3b
+z<-runif(80000,min=1,max=3)
 
+hist((1/4)*(((z)-1)**3))
+par(new=T)
+plot((1/4)*((x1-1)**3),type='l',xlab='1<x<3')
+#3c
+#esperanza empirica
+esperanza3c <- (sum(z)*1/80000)
+#esperanza teorica
+Esperanza3_c
+#var teorica
+media3c1<-(1/80000)
+media3c2<-mean(z)
+var3_c<- (1/80000)*sum(((1/80000)-(1/80000))*(z-media3c2))
+#var empirica
+variancia3<- var(z)
 
 
 #4a
