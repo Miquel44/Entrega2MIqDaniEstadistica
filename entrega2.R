@@ -56,3 +56,38 @@ mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6)
 m<-mean(1,2,3,4,5,6)
 varianza<-(((1/12-mp)*(1-m))**2+((1/10-mp)*(2-m))**2+((7/36-mp)*(3-m))**2+((3/20-mp)*(4-m))**2+((11/36-mp)*(5-m))**2+((1/6-mp)*(6-m))**2)/6
 Esperança<-1/12*1+1/10*2+7/36*3+3/20*4+11/36*5+1/6*6
+
+#4a
+(295-298)/3
+#mirant les tables de distribucio normal la probabilitat es 0,8413
+probab1<-1-0.8413
+(290-298)/3
+#0.0039
+(310-298)/3
+#0.999968329
+probab2<-0.999968329-(0.0039)
+#4b
+#mirant les tables seria un 1,64
+#(x-298)/3=1,64
+1.64*3+298
+#4c
+a<-(factorial(6)/(factorial(0)*factorial(6-0)))*probab1**0*(1-probab1)**(6-0)
+b<-(factorial(6)/(factorial(1)*factorial(6-1)))*probab1**1*(1-probab1)**(6-1)
+c<-(factorial(6)/(factorial(2)*factorial(6-2)))*probab1**2*(1-probab1)**(6-2)
+d<-(factorial(6)/(factorial(3)*factorial(6-3)))*probab1**3*(1-probab1)**(6-3)
+e<-(factorial(6)/(factorial(4)*factorial(6-4)))*probab1**4*(1-probab1)**(6-4)
+f<-(factorial(6)/(factorial(5)*factorial(6-5)))*probab1**5*(1-probab1)**(6-5)
+g<-(factorial(6)/(factorial(6)*factorial(6-6)))*probab1**6*(1-probab1)**(6-6)
+pcaixa<-sum(c,d,e,f,g)
+p<-0
+for (i in 30:100){
+  p<-p+(factorial(100)/(factorial(i)*factorial(100-i)))*pcaixa**i*(1-pcaixa)**(100-i)
+}
+#4d
+dist<-24.4
+me<-mean(a,b,c,d,f,g)
+ml<-mean(0,1,2,3,4,5,6)
+desv<-sqrt(((((a-me)*(0-ml))**2+((b-me)*(1-ml))**2+((c-me)*(2-ml))**2+((d-me)*(3-ml))**2+((e-me)*(4-ml))**2+((f-me)*(5-ml))**2)+((g-me)*(6-ml))**2)/7)
+#4e
+(30-dist)/desv
+#1-0.999996602
