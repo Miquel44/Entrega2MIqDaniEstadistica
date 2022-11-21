@@ -1,4 +1,3 @@
-df = enquesta
 df<- read.csv("enquesta.csv")
 #1a
 mean(df$TABAC)#probabilidad de que una persona fume
@@ -13,9 +12,7 @@ d160<-mean(df$ALTURA>=160 & df$SEXE=="d") #Variable Mujeres de 160 o mas
 x<-mean((df$OCI==1 | df$OCI==2) & df$ALTURA>=160 & df$SEXE=="d") #Variable de mujeres de 160 o mas que fuman y miran televisores o Pc
 (x/d160)*100  #Probabilidad de que si es mujer de 160, su ocio sea televisores u ordenadores
 #1c
-hsport<-mean(df$OCI==4  & df$SEXE=="h")
 hof<-mean(df$OCI==4 & df$TABAC==1 & df$SEXE=="h") #Variable hombres que hacen deporte y fuman 
-hof/hsport*100
 
 fumador<-mean(df$TABAC==1) #Variable fumadores
 hof/fumador*100 #Probabilidades de que si es fumador sea hombre que hace deporte
@@ -35,19 +32,16 @@ dau<-function(k){   #Funcion de K para valores pares e impares
   }
 }
 #2b
-x<-c(1:6) #Representamos un vector con los valores del dado y sus posibilidades
-y<-c(1/12,1/10,7/36,3/20,11/36,1/6) 
-plot(x,y,type="h") #Grafica masa de 
-#dado1
-acum<-cumsum(y) # Suma acumulada
-s<-stepfun(x,c(0,acum)) #Mete los valores X a k uno a uno
-plotdau1<-plot(s,verticals=FALSE) #Grafica dado 1
-#dado2
+x<-c(1:6)
+y<-c(1/12,1/10,7/36,3/20,11/36,1/6)
+plot(x,y,type="h")
+acum<-cumsum(y)
+s<-stepfun(x,c(0,acum))
+plotdau1<-plot(s,verticals=FALSE)
 xn<-c(1:6)
 yn<-c(1/6,1/6,1/6,1/6,1/6,1/6)
 acumn<-cumsum(yn)
 sn<-stepfun(xn,c(0,acumn))
-#Grafica ambos
 plotdau2<-plot(sn,verticals=FALSE,col = 'red')
 par(new=T)
 plotdau1<-plot(s,verticals=FALSE)
@@ -58,18 +52,10 @@ sum(y[c(2,4,6)])
 sum(y[c(5,6)])
 sum(y[c(1,2,3,4)])
 #2d
-mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6) 
+mp<-mean(1/12,1/10,7/36,3/20,11/36,1/6)
 m<-mean(1,2,3,4,5,6)
-varianza<-{(((1/12-mp)*(1-m))+((1/10-mp)*(2-m))+((7/36-mp)*(3-m))+((3/20-mp)*(4-m))+((11/36-mp)*(5-m))+((1/6-mp)*(6-m))/6)}
-            
+varianza<-(((1/12-mp)*(1-m))**2+((1/10-mp)*(2-m))**2+((7/36-mp)*(3-m))**2+((3/20-mp)*(4-m))**2+((11/36-mp)*(5-m))**2+((1/6-mp)*(6-m))**2)/6
 Esperança<-1/12*1+1/10*2+7/36*3+3/20*4+11/36*5+1/6*6
-
-y<-c(1/12,1/10,7/36,3/20,11/36,1/6) 
-list<-sample(1:6,300,replace=T,prob=(y))
-mean(list)
-var(list)
-
-
 #2e
 caso2<-(1/12)*(1/12) 
 caso3<-(1/12)*(1/10)*2
@@ -79,6 +65,7 @@ ProbResul<-1-sum(caso2,caso3,caso4)
 caso11<-(1/6)*(11/36)*2    #Que de 11, para restar a prob total => 5
 caso12<-(1/6)*(1/6)   #Resultado 12, restar a prob total >= 5
 Probtotalres<- ProbResul-caso11-caso12
+
 
 
 
@@ -102,16 +89,28 @@ hist((1/4)*(((z)-1)**3))
 par(new=T)
 plot((1/4)*((x1-1)**3),type='l',xlab='1<x<3')
 #3c
+ll<-list(c(1:80000))
+it<-1
+for (i in z){
+  ll[it]<-((1/4)*((i-1)**3))
+  it<-it+1
+}
 #esperanza empirica
 esperanza3c <- (sum(z)*1/80000)
 #esperanza teorica
 Esperanza3_c
 #var teorica
-media3c1<-(1/80000)
+sss<-0
+for (i in ll){
+  sss<-sss+i
+}
+media3c1<-sss/80000
 media3c2<-mean(z)
-var3_c<- (1/80000)*sum(((1/80000)-(1/80000))*(z-media3c2))
+var3_c<- (1/80000)*sum(((1/80000)-media3c1)*(z-media3c2))
+
 #var empirica
 variancia3<- var(z)
+
 
 
 #4a
@@ -141,10 +140,9 @@ for (i in 30:100){
   p<-p+(factorial(100)/(factorial(i)*factorial(100-i)))*pcaixa**i*(1-pcaixa)**(100-i)
 }
 #4d
-dist<-24.4
-me<-mean(a,b,c,d,f,g)
-ml<-mean(0,1,2,3,4,5,6)
-desv<-sqrt(((((a-me)*(0-ml))**2+((b-me)*(1-ml))**2+((c-me)*(2-ml))**2+((d-me)*(3-ml))**2+((e-me)*(4-ml))**2+((f-me)*(5-ml))**2)+((g-me)*(6-ml))**2)/7)
+mu<-pcaixa*100
+sigma<-sqrt(mu*(1-pcaixa))
 #4e
-(30-dist)/desv
-#1-0.999996602
+g<-pnorm(30-mu,sigma)
+1-g
+
